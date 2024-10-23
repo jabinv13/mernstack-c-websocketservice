@@ -14,9 +14,15 @@ io.on("connection", (socket) => {
   socket.on("join", (data) => {
     socket.join(String(data.tenantId));
 
+    console.log("this ws");
+
+    console.log(io.of("/").adapter.rooms);
+
     //server to client
     socket.emit("join", { roomId: String(data.tenantId) });
   });
+
+  console.log("first");
 });
 
 export default {

@@ -4,14 +4,14 @@ import { MessageBroker } from "./src/types/broker";
 import ws from "./src/socket";
 import config from "config";
 
-const PORT = config.get("server.port");
-
 const startServer = async () => {
   let broker: MessageBroker | null = null;
   try {
     broker = createMessageBroker();
     await broker.connectConsumer();
     await broker.consumeMessage(["order"], false);
+
+    const PORT = config.get("server.port");
 
     ws.wsServer
       .listen(PORT, () => {
